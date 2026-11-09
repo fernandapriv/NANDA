@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Verificação de acesso</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(180deg, #ff9ec5 0%, #ff6b9d 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px 28px 32px;
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  }
+  .shield {
+    width: 72px;
+    height: 72px;
+    background: #e91e63;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .shield svg {
+    width: 36px;
+    height: 36px;
+    fill: #fff;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: #666;
+    line-height: 1.45;
+    margin-bottom: 28px;
+  }
+  .confirm-box {
+    border: 1.5px solid #e91e63;
+    border-radius: 14px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+    cursor: pointer;
+  }
+  .checkbox {
+    width: 28px;
+    height: 28px;
+    background: #e91e63;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .checkbox svg { width: 16px; height: 16px; fill: #fff; }
+  .confirm-text {
+    text-align: left;
+  }
+  .confirm-text strong {
+    display: block;
+    font-size: 15px;
+    color: #1a1a1a;
+    margin-bottom: 2px;
+  }
+  .confirm-text span {
+    font-size: 13px;
+    color: #888;
+  }
+  .btn {
+    width: 100%;
+    background: #e91e63;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn.loading {
+    background: #f48fb1;
+    pointer-events: none;
+  }
+  .footer {
+    margin-top: 28px;
+    font-size: 12px;
+    color: #999;
+  }
+  .success {
+    display: none;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #e91e63;
+    font-weight: 500;
+  }
+  .success.show { display: block; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="shield">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+    </div>
+
+    <h1>Verificação de acesso</h1>
+    <p class="subtitle">Confirme que deseja continuar para acessar<br>o conteúdo.</p>
+
+    <div class="confirm-box" onclick="toggleCheck()">
+      <div class="checkbox" id="check">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+      </div>
+      <div class="confirm-text">
+        <strong>Confirmar e continuar</strong>
+        <span>Toque no quadradinho para prosseguir</span>
+      </div>
+    </div>
+
+    <button class="btn" id="btn" onclick="liberar()">
+      <span id="btnText">🔥 Liberar acesso</span>
+    </button>
+
+    <p class="footer">Confirmação de acesso · Continue quando estiver pronto</p>
+    <p class="success" id="success">🔥 Acesso confirmado! Preparando seu conteúdo exclusivo...</p>
+  </div>
+
+<script>
+  let checked = true;
+
+  function toggleCheck() {
+    checked = !checked;
+    document.getElementById('check').style.opacity = checked ? '1' : '0.3';
+  }
+
+  function liberar() {
+    if (!checked) {
+      alert('Marque a confirmação para continuar');
+      return;
+    }
+
+    const btn = document.getElementById('btn');
+    const btnText = document.getElementById('btnText');
+    const success = document.getElementById('success');
+
+    btn.classList.add('loading');
+    btnText.innerHTML = '🔥 Liberando acesso...';
+    success.classList.add('show');
+
+    setTimeout(() => {
+      window.location.href = "https://paypack.fans/fefe_ops";
+    }, 1800);
+  }
+</script>
+</body>
+</html>
